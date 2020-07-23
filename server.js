@@ -21,7 +21,7 @@ function doRequest(request, response){
     if(uri=="/board/list"){
         boardController.getList(request, response);
     }else if(uri=="/board/detail"){
-
+        boardController.getDetail(request, response);
     }else if(uri=="/board/regist"){
         boardController.insert(request, response);
     }else if(uri=="/board/update"){
