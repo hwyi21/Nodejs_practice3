@@ -96,11 +96,58 @@ exports.insert=function(request, response){
     });
     
 }
-exports.update=function(){
-    
+exports.update=function(request, response){
+    var content="";
+    request.on("data",function(data){
+        content+=data;
+        var param = querystring.parse(content);
+        console.log("업데이트");
+        console.log("제목 : " , param.title);
+        console.log("작성자 : " , param.writer);
+        console.log("내용 : " , param.content);
+
+        var client=mysql.createConnection(conStr);
+        var sql="update board set title=?, writer=?, content=?";
+        sql+=" where board_id=?";
+
+        client.query(sql,[param.title, param.writer, param.content, param.board_id],function(err, result, fields){
+            response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+            if(err){
+                console.log(err);
+                response.end("실패");
+            }else{
+                console.log("성공");
+                //같은 모듈 안의 메서드 호출하기
+                module.exports.getDetail(request, response); 
+            }
+            client.end(function(err){
+                console.log("Connection end...");
+            });
+        });
+
+    });
 }
-exports.del=function(){
+
+exports.del=function(request, response){
+    var urlObj=url.parse(request.url, true);
+    var board_id=urlObj.query.board_id;
+    console.log("넘겨받은 id ", board_id);
     
+    var sql="delete from board where board_id=?";
+
+    var client = mysql.createConnection(conStr);
+    client.query(sql,[board_id], function(err, fields){
+        response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+        if(err){
+            console.log(err);
+        }else{
+            console.log("삭제 성공 ");
+            module.exports.getList(request, response); 
+        }
+        client.end(function(err){
+            console.log("Connection end...");
+        });
+    });
 }
 
 exports.registForm=function(request, response){

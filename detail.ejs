@@ -37,20 +37,27 @@ input[type=submit], input[type=button]:hover {
   padding: 20px;
 }
 </style>
+<script>
+function goList(){
+    location.href="/board/list";
+}
+
+</script>
 </head>
 <body>
 
 <h3>Contact Form</h3>
 
 <div class="container">
-  <form action="/board/regist" method="post">
+  <form action="/board/update?board_id=<%=board.board_id%>" method="post">
     <input type="hidden" name="board_id" value="<%=board.board_id%>">  
     <input type="text" name="title" value="<%=board.title%>">   
     <input type="text" name="writer" value="<%=board.writer%>">
     <textarea name="content" style="height:200px"><%=board.content%></textarea>
-    <input type="button" value="수정">
-    <input type="button" value="삭제">
-    <input type="button" value="목록">
+
+    <input type="submit" value="수정">
+    <input type="button" value="삭제" onclick="location.href='/board/delete?board_id=<%=board.board_id%>'">
+    <input type="button" value="목록" onclick="goList()">
     
   </form>
 </div>

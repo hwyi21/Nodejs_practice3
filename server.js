@@ -25,9 +25,9 @@ function doRequest(request, response){
     }else if(uri=="/board/regist"){
         boardController.insert(request, response);
     }else if(uri=="/board/update"){
-
+        boardController.update(request, response);
     }else if(uri=="/board/delete"){
-
+        boardController.del(request, response);
     }else if(uri=="/board/registForm"){
         //글 등록폼에 대한 요청 처리
         boardController.registForm(request, response);

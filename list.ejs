@@ -39,10 +39,11 @@ function registForm(){
     <th>등록일</th>
     <th>조회수</th>
   </tr>
+  <% var num=boardList.length%>
   <%for(var i=0; i<boardList.length; i++){%>
   <%var board=boardList[i]; %>
   <tr>
-    <td></td>
+    <td><%=num--;%></td>
     <td>
         <a href="/board/detail?board_id=<%=board.board_id%>"><%=board.title%></a>        
     </td>
