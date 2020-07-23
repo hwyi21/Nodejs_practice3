@@ -23,14 +23,14 @@ function doRequest(request, response){
     }else if(uri=="/board/detail"){
 
     }else if(uri=="/board/regist"){
-
+        boardController.insert(request, response);
     }else if(uri=="/board/update"){
 
     }else if(uri=="/board/delete"){
 
     }else if(uri=="/board/registForm"){
         //글 등록폼에 대한 요청 처리
-        boardController.registForm(request, rsponse);
+        boardController.registForm(request, response);
     }
 }
 
